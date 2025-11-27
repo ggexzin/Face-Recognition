@@ -8,7 +8,7 @@ LABELS_FILE = 'labels.pkl'
 IMG_SIZE = (200, 200)  # tamanho uniforme para todos os rostos
 
 def preprocess_face(img):
-    """Redimensiona e aplica equalização de histograma."""
+    # Redimensiona e aplica equalização de histograma.
     img_resized = cv2.resize(img, IMG_SIZE)
     img_equalized = cv2.equalizeHist(img_resized)
     return img_equalized
@@ -31,7 +31,7 @@ def train(dataset_dir: str = 'dataset'):
         for img_file in person_dir.glob('*.jpg'):
             img = cv2.imread(str(img_file), cv2.IMREAD_GRAYSCALE)
             if img is None:
-                print(f"Imagem inválida ignorada: {img_file}")
+                print(f"Invalid image ignored: {img_file}")
                 continue
             img = preprocess_face(img)
             faces.append(img)
@@ -40,7 +40,7 @@ def train(dataset_dir: str = 'dataset'):
         current_label += 1
 
     if not faces:
-        raise RuntimeError('Nenhuma imagem válida encontrada para treino.')
+        raise RuntimeError('No valid images were found for training.')
 
     # --- Criar LBPH recognizer ---
     try:
@@ -49,8 +49,8 @@ def train(dataset_dir: str = 'dataset'):
         )
     except AttributeError:
         raise RuntimeError(
-            "LBPHFaceRecognizer não encontrado. "
-            "Instale opencv-contrib-python: pip install opencv-contrib-python"
+            "LBPHFaceRecognizer not found. "
+            "Install opencv-contrib-python: pip install opencv-contrib-python"
         )
 
     recognizer.train(faces, np.array(labels))
@@ -60,8 +60,8 @@ def train(dataset_dir: str = 'dataset'):
     with open(LABELS_FILE, 'wb') as f:
         pickle.dump(label_dict, f)
 
-    print(f'Treino concluído. Modelo salvo em {MODEL_FILE}')
-    print(f'Labels salvos em {LABELS_FILE}: {label_dict}')
+    print(f'Training complete. Model saved at {MODEL_FILE}')
+    print(f'Labels saved to {LABELS_FILE}: {label_dict}')
 
 if __name__ == '__main__':
     train()
