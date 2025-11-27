@@ -1,6 +1,5 @@
-import os, cv2, mediapipe as mp
+import cv2, mediapipe as mp
 import pickle
-import numpy as np
 
 IMG_SIZE = (200, 200)
 MAX_CONFIDENCE = 70  # limite para reconhecer como válido
@@ -21,7 +20,7 @@ def recognise(cam_index=0):
 
     cap = cv2.VideoCapture(cam_index)
     if not cap.isOpened():
-        raise RuntimeError("Não foi possível abrir a câmera.")
+        raise RuntimeError("Your camera is off or your device doesn't have one!")
 
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -36,7 +35,7 @@ def recognise(cam_index=0):
     previous_name = None
     previous_frames = 0
 
-    print("Reconhecimento iniciado. Pressione q para sair.")
+    print("Recognition started. Press 'escape' to leave")
 
     while True:
         ret, frame = cap.read()
@@ -60,9 +59,9 @@ def recognise(cam_index=0):
                 label, confidence = recognizer.predict(face_img)
 
                 if confidence > MAX_CONFIDENCE:
-                    name = "Desconhecido"
+                    name = "Unknown"
                 else:
-                    name = labels.get(label, "Desconhecido")
+                    name = labels.get(label, "Unknown")
 
                 # suavização
                 if previous_name == name and previous_frames < MAX_HISTORY:
@@ -94,7 +93,7 @@ def recognise(cam_index=0):
 
 
         cv2.imshow("Face Mesh Recognition", frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == 27: # de acordo com a documentação do cv2 a tecla 27 corresponde ao "escape"
             break
 
     cap.release()

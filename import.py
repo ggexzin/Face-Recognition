@@ -15,7 +15,7 @@ def capture_images(name, cam_index=0):
 
     cap = cv2.VideoCapture(cam_index)
     if not cap.isOpened(): 
-        raise RuntimeError("Não foi possível abrir a câmera.")
+        raise RuntimeError("Your camera is off or your device doesn't have one!")
 
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -28,7 +28,7 @@ def capture_images(name, cam_index=0):
     )
 
     total_saved = 0
-    print("Olhe para a câmera. Captura iniciada...")
+    print("Look at the camera! Process started...")
 
     while total_saved < MAX_IMAGES:
         ret, frame = cap.read()
@@ -66,11 +66,11 @@ def capture_images(name, cam_index=0):
 
     cap.release()
     cv2.destroyAllWindows()
-    print(f"Captura concluída. {total_saved} fotos salvas em: {folder}")
+    print(f"Import was concluted successfully. {total_saved} images saved at: {folder}")
 
 
 if __name__ == "__main__":
-    person_name = input("Nome da pessoa: ").strip()
+    person_name = input("Person name: ").strip()
     while not person_name:
-        person_name = input("Por favor insira um nome válido: ").strip()
+        person_name = input("Please enter a valid name: ").strip()
     capture_images(person_name)
