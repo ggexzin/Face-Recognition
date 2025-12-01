@@ -54,7 +54,7 @@ def train(dataset_dir: str = 'dataset'):
         )
 
     recognizer.train(faces, np.array(labels)) # Quais são os padrões faciais de cada pessoa | A que label cada face corresponde
-    recognizer.write(MODEL_FILE)
+    recognizer.write(MODEL_FILE) #cria lbph_model.yml
 
     # salvar mapping de labels para nomes
     with open(LABELS_FILE, 'wb') as f:
