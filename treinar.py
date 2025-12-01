@@ -47,7 +47,7 @@ def train(dataset_dir: str = 'dataset'):
         recognizer = cv2.face.LBPHFaceRecognizer_create(
             radius=1, neighbors=8, grid_x=8, grid_y=8 #quantas a imagem terá para criar histogramas
         )
-    except AttributeError:
+    except AttributeError: #no caso do OpenCV não ter o módulo “face”
         raise RuntimeError(
             "LBPHFaceRecognizer not found. "
             "Install opencv-contrib-python: pip install opencv-contrib-python"
