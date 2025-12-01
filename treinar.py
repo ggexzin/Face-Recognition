@@ -53,7 +53,7 @@ def train(dataset_dir: str = 'dataset'):
             "Install opencv-contrib-python: pip install opencv-contrib-python"
         )
 
-    recognizer.train(faces, np.array(labels))
+    recognizer.train(faces, np.array(labels)) # Quais são os padrões faciais de cada pessoa | A que label cada face corresponde
     recognizer.write(MODEL_FILE)
 
     # salvar mapping de labels para nomes
