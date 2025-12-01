@@ -45,7 +45,7 @@ def train(dataset_dir: str = 'dataset'):
     # --- Criar LBPH recognizer ---
     try:
         recognizer = cv2.face.LBPHFaceRecognizer_create(
-            radius=1, neighbors=8, grid_x=8, grid_y=8
+            radius=1, neighbors=8, grid_x=8, grid_y=8 #quantas a imagem terá para criar histogramas
         )
     except AttributeError:
         raise RuntimeError(
