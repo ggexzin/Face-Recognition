@@ -57,7 +57,7 @@ def train(dataset_dir: str = 'dataset'):
     recognizer.write(MODEL_FILE) #cria lbph_model.yml
 
     # salvar mapping de labels para nomes
-    with open(LABELS_FILE, 'wb') as f:
+    with open(LABELS_FILE, 'wb') as f: #cria labels.pkl
         pickle.dump(label_dict, f)
 
     print(f'Training complete. Model saved at {MODEL_FILE}')
