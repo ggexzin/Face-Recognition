@@ -45,19 +45,19 @@ def train(dataset_dir: str = 'dataset'):
     # --- Criar LBPH recognizer ---
     try:
         recognizer = cv2.face.LBPHFaceRecognizer_create(
-            radius=1, neighbors=8, grid_x=8, grid_y=8
+            radius=1, neighbors=8, grid_x=8, grid_y=8 #quantas a imagem terá para criar histogramas
         )
-    except AttributeError:
+    except AttributeError: #no caso do OpenCV não ter o módulo “face”
         raise RuntimeError(
             "LBPHFaceRecognizer not found. "
             "Install opencv-contrib-python: pip install opencv-contrib-python"
         )
 
-    recognizer.train(faces, np.array(labels))
-    recognizer.write(MODEL_FILE)
+    recognizer.train(faces, np.array(labels)) # Quais são os padrões faciais de cada pessoa | A que label cada face corresponde
+    recognizer.write(MODEL_FILE) #cria lbph_model.yml
 
     # salvar mapping de labels para nomes
-    with open(LABELS_FILE, 'wb') as f:
+    with open(LABELS_FILE, 'wb') as f: #cria labels.pkl
         pickle.dump(label_dict, f)
 
     print(f'Training complete. Model saved at {MODEL_FILE}')
