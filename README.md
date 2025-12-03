@@ -2,8 +2,8 @@
 
 Este projeto contém três módulos principais:
 
-1.  **Captura de imagens** usando FaceMesh (Mediapipe)\
-2.  **Treinamento de modelo LBPH** com OpenCV\
+1.  **Captura de imagens** usando FaceMesh (Mediapipe)
+2.  **Treinamento de modelo LBPH** com OpenCV
 3.  **Reconhecimento facial em tempo real**
 
 Todos os scripts usam OpenCV, Mediapipe, NumPy e outras dependências
